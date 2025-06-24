@@ -3,7 +3,7 @@ import '../../domain/repository/producto_repository.dart';
 import 'package:app/features/producto/data/datasource/productoDatasource.dart';
 import 'package:app/features/producto/data/models/producto_model.dart';
 
-class ProductoRepositoryImpl extends ProductoRepository {
+class ProductoRepositoryImpl implements ProductoRepository {
   final Productodatasource datasource;
 
   ProductoRepositoryImpl(this.datasource);

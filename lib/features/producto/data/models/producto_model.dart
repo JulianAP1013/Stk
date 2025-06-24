@@ -7,6 +7,7 @@ class ProductoModel extends Producto {
     required String descripcion,
     required double precio,
     required String categoria,
+    required int stock,
     required int umbralStockBajo,
     required int usuarioId,
   }) : super(
@@ -15,6 +16,7 @@ class ProductoModel extends Producto {
          descripcion: descripcion,
          precio: precio,
          categoria: categoria,
+         stock: stock,
          umbralStockBajo: umbralStockBajo,
          usuarioId: usuarioId,
        );
@@ -26,6 +28,7 @@ class ProductoModel extends Producto {
       descripcion: map['descripcion'],
       precio: map['precio'],
       categoria: map['categoria'],
+      stock: map['stock'],
       umbralStockBajo: map['umbral_stock_bajo'],
       usuarioId: map['usuario_id'],
     );
@@ -38,6 +41,7 @@ class ProductoModel extends Producto {
       'descripcion': descripcion,
       'precio': precio,
       'categoria': categoria,
+      'stock': stock,
       'umbral_stock_bajo': umbralStockBajo,
       'usuario_id': usuarioId,
     };

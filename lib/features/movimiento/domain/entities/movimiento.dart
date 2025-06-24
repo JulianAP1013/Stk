@@ -1,0 +1,19 @@
+class Movimiento {
+  final int? id;
+  final int productoId;
+  final String tipo; // 'entrada' o 'salida'
+  final int cantidad;
+  final DateTime fecha;
+  final String detalles;
+  final int usuarioId;
+
+  Movimiento({
+    this.id,
+    required this.productoId,
+    required this.tipo,
+    required this.cantidad,
+    required this.fecha,
+    required this.detalles,
+    required this.usuarioId,
+  });
+}
