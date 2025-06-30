@@ -47,7 +47,7 @@ class ProductorxViewmodel {
 
   Future<List<Producto>> getProductoConStockBajo(int usuarioId) async {
     final producto = await _getproductoconstockbajo(usuarioId);
-    return producto;
+    return producto.where((p) => p.stock <= p.umbralStockBajo).toList();
   }
 
   Future<void> deleteProducto(int id, int usuarioId) async {

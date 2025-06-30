@@ -1,8 +1,9 @@
 import '../entities/producto.dart';
-import '../repository/producto_Repository_Impl.dart';
+import '../repository/producto_Repository.dart';
 
 class Getproductoconstockbajo {
-  final ProductoRepositoryImpl repo;
+  final ProductoRepository repo;
   Getproductoconstockbajo(this.repo);
-  Future<List<Producto>> call(int usuarioId) => repo.getProductosConStockBajo(usuarioId);
+  Future<List<Producto>> call(int usuarioId) =>
+      repo.getProductosConStockBajo(usuarioId);
 }

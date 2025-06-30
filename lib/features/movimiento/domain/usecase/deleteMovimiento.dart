@@ -1,7 +1,7 @@
-import '../repository/movimientoRepositoryImpl.dart';
+import '../repository/movimientoRepository.dart';
 
 class Deletemovimiento {
-  final Movimientorepositoryimpl repo;
+  final Movimientorepository repo;
   Deletemovimiento(this.repo);
 
   Future<void> call(int id, int usuarioId) =>

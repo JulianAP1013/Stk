@@ -1,8 +1,8 @@
-import '../repository/usuarioRepositoryImpl.dart';
+import '../repository/usuarioRepository.dart';
 import '../entities/usuario.dart';
 
 class Insertusuario {
-  UsuarioRepositoryImpl repo;
+  UsuarioRepository repo;
   Insertusuario(this.repo);
 
   Future<void> call(Usuario usuario) => repo.insertUsuario(usuario);

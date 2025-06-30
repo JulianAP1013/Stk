@@ -1,3 +1,5 @@
+import 'package:app/features/movimiento/presentation/pages/movimiento_pages.dart';
+
 import '../../domain/entities/movimiento.dart';
 
 class MovimientoModel extends Movimiento {
@@ -37,4 +39,16 @@ class MovimientoModel extends Movimiento {
     'detalles': detalles,
     'usuario_id': usuarioId,
   };
+
+  factory MovimientoModel.fromMovimiento(Movimiento movimiento) {
+    return MovimientoModel(
+      id: movimiento.id!,
+      productoId: movimiento.productoId,
+      tipo: movimiento.tipo,
+      cantidad: movimiento.cantidad,
+      fecha: movimiento.fecha,
+      detalles: movimiento.detalles,
+      usuarioId: movimiento.usuarioId,
+    );
+  }
 }

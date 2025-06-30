@@ -9,7 +9,7 @@ class UsuarioRepositoryImpl implements UsuarioRepository {
 
   @override
   Future<void> insertUsuario(Usuario usuario) =>
-      datasource.insertUsuario(usuario as UsuarioModel);
+      datasource.insertUsuario(UsuarioModel.fromUsuario(usuario));
 
   @override
   Future<Usuario> getUsuario(String email, String password) async {
@@ -22,7 +22,7 @@ class UsuarioRepositoryImpl implements UsuarioRepository {
 
   @override
   Future<void> updateUsuario(Usuario usuario) =>
-      datasource.updateUsuario(usuario as UsuarioModel);
+      datasource.updateUsuario(UsuarioModel.fromUsuario(usuario));
 
   @override
   Future<void> deleteUsuario(int id) => datasource.deleteUsuario(id);

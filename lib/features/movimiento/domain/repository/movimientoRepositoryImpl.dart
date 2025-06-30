@@ -9,7 +9,7 @@ class Movimientorepositoryimpl implements Movimientorepository {
 
   @override
   Future<void> insertMovimiento(Movimiento movimiento) =>
-      datasource.insertMovimiento(movimiento as MovimientoModel);
+      datasource.insertMovimiento(MovimientoModel.fromMovimiento(movimiento));
 
   @override
   Future<List<Movimiento>> getMovimientos(int usuarioId) =>
@@ -21,7 +21,7 @@ class Movimientorepositoryimpl implements Movimientorepository {
 
   @override
   Future<void> updateMovimiento(Movimiento movimiento) =>
-      datasource.updateMovimiento(movimiento as MovimientoModel);
+      datasource.updateMovimiento(MovimientoModel.fromMovimiento(movimiento));
 
   @override
   Future<void> deleteMovimiento(int id, int usuarioId) =>

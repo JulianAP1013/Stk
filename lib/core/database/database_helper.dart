@@ -33,10 +33,10 @@ class DatabaseHelper {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         nombre TEXT NOT NULL,
         descripcion TEXT,
-        cantidad INTEGER NOT NULL,
+        stock INTEGER NOT NULL,
         precio REAL NOT NULL,
         categoria TEXT NOT NULL,
-        umbralStockBajo INTEGER NOT NULL,
+        umbral_stock_bajo INTEGER NOT NULL,
         usuarioId INTEGER NOT NULL,
         FOREIGN KEY (usuarioId) REFERENCES usuarios (id) ON DELETE CASCADE)''');
     await db.execute('''
@@ -46,10 +46,16 @@ class DatabaseHelper {
         tipo TEXT NOT NULL,
         cantidad INTEGER NOT NULL,
         fecha TEXT NOT NULL,
-        observacion TEXT
+        observacion TEXT,
         usuarioId INTEGER NOT NULL,
         FOREIGN KEY (productoId) REFERENCES productos (id) ON DELETE CASCADE,
         FOREIGN KEY (usuarioId) REFERENCES usuarios (id) ON DELETE CASCADE)''');
+  }
+
+  void borrarBaseDeDatos() async {
+    final path = join(await getDatabasesPath(), 'app.db');
+    await deleteDatabase(path);
+    print('Base de datos eliminada');
   }
 
   static Future _onUpgrade(Database db, int oldVersion, int newVersion) async {

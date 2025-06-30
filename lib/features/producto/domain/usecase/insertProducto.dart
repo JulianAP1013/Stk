@@ -1,8 +1,8 @@
 import '../entities/producto.dart';
-import '../repository/producto_Repository_Impl.dart';
+import '../repository/producto_Repository.dart';
 
 class InsertProducto {
-  final ProductoRepositoryImpl repo;
+  final ProductoRepository repo;
   InsertProducto(this.repo);
   Future<void> call(Producto producto) => repo.insertProducto(producto);
 }

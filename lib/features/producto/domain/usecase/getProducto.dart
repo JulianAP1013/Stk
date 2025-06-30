@@ -1,8 +1,8 @@
 import '../entities/producto.dart';
-import '../repository/producto_Repository_Impl.dart';
+import '../repository/producto_Repository.dart';
 
 class Getproducto {
-  final ProductoRepositoryImpl repo;
+  final ProductoRepository repo;
   Getproducto(this.repo);
   Future<List<Producto>> call(int usuarioId) => repo.getProductos(usuarioId);
 }

@@ -1,8 +1,9 @@
 import 'package:app/features/producto/domain/entities/producto.dart';
+import '../../domain/entities/producto.dart';
 
 class ProductoModel extends Producto {
   ProductoModel({
-    required int id,
+    int? id,
     required String nombre,
     required String descripcion,
     required double precio,
@@ -30,7 +31,7 @@ class ProductoModel extends Producto {
       categoria: map['categoria'],
       stock: map['stock'],
       umbralStockBajo: map['umbral_stock_bajo'],
-      usuarioId: map['usuario_id'],
+      usuarioId: map['usuarioId'],
     );
   }
 
@@ -43,7 +44,20 @@ class ProductoModel extends Producto {
       'categoria': categoria,
       'stock': stock,
       'umbral_stock_bajo': umbralStockBajo,
-      'usuario_id': usuarioId,
+      'usuarioId': usuarioId,
     };
+  }
+
+  factory ProductoModel.fromProducto(Producto producto) {
+    return ProductoModel(
+      id: producto.id,
+      nombre: producto.nombre,
+      descripcion: producto.descripcion,
+      stock: producto.stock,
+      precio: producto.precio,
+      categoria: producto.categoria,
+      umbralStockBajo: producto.umbralStockBajo,
+      usuarioId: producto.usuarioId,
+    );
   }
 }

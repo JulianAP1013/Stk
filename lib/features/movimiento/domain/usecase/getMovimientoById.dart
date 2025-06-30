@@ -1,8 +1,8 @@
-import '../repository/movimientoRepositoryImpl.dart';
+import '../repository/movimientoRepository.dart';
 import '../entities/movimiento.dart';
 
 class Getmovimientobyid {
-  final Movimientorepositoryimpl repo;
+  final Movimientorepository repo;
   Getmovimientobyid(this.repo);
 
   Future<Movimiento> call(int id, int usuarioId) =>

@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-
 import '../../domain/entities/usuario.dart';
 
 class UsuarioModel extends Usuario {
@@ -17,9 +16,17 @@ class UsuarioModel extends Usuario {
   );
 
   Map<String, dynamic> toMap() => {
-    'id': id,
     'nombre': nombre,
     'email': email,
     'password': password,
   };
+
+  factory UsuarioModel.fromUsuario(Usuario usuario) {
+    return UsuarioModel(
+      id: usuario.id,
+      nombre: usuario.nombre,
+      email: usuario.email,
+      password: usuario.password,
+    );
+  }
 }

@@ -2,7 +2,9 @@ import 'package:get_it/get_it.dart';
 import 'package:app/core/database/database_helper.dart';
 import 'package:sqflite/sqflite.dart';
 /* AUTH */
+import '../features/auth/data/datasource/authDatasource.dart';
 import '../features/auth/data/datasource/authDatasourceImpl.dart';
+import '../features/auth/domain/repository/authRepository.dart';
 import '../features/auth/domain/repository/authRepositoryImpl.dart';
 // Casos de uso
 import 'package:app/features/auth/domain/usecase/login.dart';
@@ -12,7 +14,9 @@ import 'package:app/features/auth/domain/usecase/register.dart';
 // ViewModel
 import 'package:app/features/auth/presentation/viewmodel/authRx_ViewModel.dart';
 /* Productos */
+import '../features/producto/data/datasource/productoDatasource.dart';
 import '../features/producto/data/datasource/protucto_Datasource_Impl.dart';
+import '../features/producto/domain/repository/producto_Repository.dart';
 import '../features/producto/domain/repository/producto_Repository_Impl.dart';
 // Casos de uso
 import 'package:app/features/producto/domain/usecase/insertProducto.dart';
@@ -24,7 +28,9 @@ import 'package:app/features/producto/domain/usecase/updateProducto.dart';
 // ViewModel
 import 'package:app/features/producto/presentation/viewmodels/productoRx_ViewModel.dart';
 /* MOVIMIENTO */
+import '../features/movimiento/data/datasource/movimientoDatasource.dart';
 import '../features/movimiento/data/datasource/movimientoDatasourceImpl.dart';
+import '../features/movimiento/domain/repository/movimientoRepository.dart';
 import '../features/movimiento/domain/repository/movimientoRepositoryImpl.dart';
 // Casos de uso
 import 'package:app/features/movimiento/domain/usecase/deleteMovimiento.dart';
@@ -35,7 +41,9 @@ import 'package:app/features/movimiento/domain/usecase/updateMovimiento.dart';
 // ViewModel
 import 'package:app/features/movimiento/presentation/viewmodels/movimientoRx_ViewModel.dart';
 /* USUARIO */
+import '../features/usuario/data/datasource/usuarioDatasource.dart';
 import '../features/usuario/data/datasource/usuarioDatasourceImpl.dart';
+import '../features/usuario/domain/repository/usuarioRepository.dart';
 import '../features/usuario/domain/repository/usuarioRepositoryImpl.dart';
 // Casos de uso
 import 'package:app/features/usuario/domain/usecase/deleteUsuario.dart';
@@ -54,8 +62,10 @@ Future<void> setupLocator() async {
   sl.registerLazySingleton<Database>(() => db);
 
   /* AUTH */
-  sl.registerLazySingleton(() => Authdatasourceimpl(sl<Database>()));
-  sl.registerLazySingleton(() => Authrepositoryimpl(sl()));
+  sl.registerLazySingleton<Authdatasource>(
+    () => Authdatasourceimpl(sl<Database>()),
+  );
+  sl.registerLazySingleton<Authrepository>(() => Authrepositoryimpl(sl()));
   // Casos de uso
   sl.registerLazySingleton<Login>(() => Login(sl()));
   sl.registerLazySingleton<Register>(() => Register(sl()));
@@ -71,8 +81,12 @@ Future<void> setupLocator() async {
     ),
   );
   /* PRODUCTO */
-  sl.registerLazySingleton(() => ProtuctoDatasourceImpl(sl<Database>()));
-  sl.registerLazySingleton(() => ProductoRepositoryImpl(sl()));
+  sl.registerLazySingleton<Productodatasource>(
+    () => ProtuctoDatasourceImpl(sl<Database>()),
+  );
+  sl.registerLazySingleton<ProductoRepository>(
+    () => ProductoRepositoryImpl(sl()),
+  );
   // Casos de uso
   sl.registerLazySingleton<InsertProducto>(() => InsertProducto(sl()));
   sl.registerLazySingleton<Getproducto>(() => Getproducto(sl()));
@@ -95,8 +109,12 @@ Future<void> setupLocator() async {
   );
 
   /* MOVIMIENTO */
-  sl.registerLazySingleton(() => Movimientodatasourceimpl(sl<Database>()));
-  sl.registerLazySingleton(() => Movimientorepositoryimpl(sl()));
+  sl.registerLazySingleton<Movimientodatasource>(
+    () => Movimientodatasourceimpl(sl<Database>()),
+  );
+  sl.registerLazySingleton<Movimientorepository>(
+    () => Movimientorepositoryimpl(sl()),
+  );
   // Casos de uso
   sl.registerLazySingleton<Insertmovimiento>(() => Insertmovimiento(sl()));
   sl.registerLazySingleton<Getmovimiento>(() => Getmovimiento(sl()));
@@ -115,8 +133,12 @@ Future<void> setupLocator() async {
   );
 
   /* USUARIO */
-  sl.registerLazySingleton(() => Usuariodatasourceimpl(sl<Database>()));
-  sl.registerLazySingleton(() => UsuarioRepositoryImpl(sl()));
+  sl.registerLazySingleton<Usuariodatasource>(
+    () => Usuariodatasourceimpl(sl<Database>()),
+  );
+  sl.registerLazySingleton<UsuarioRepository>(
+    () => UsuarioRepositoryImpl(sl()),
+  );
   // Casos de uso
   sl.registerLazySingleton<Insertusuario>(() => Insertusuario(sl()));
   sl.registerLazySingleton<Getusuario>(() => Getusuario(sl()));

@@ -1,7 +1,7 @@
-import '../repository/producto_Repository_Impl.dart';
+import '../repository/producto_Repository.dart';
 
 class Deleteproducto {
-  final ProductoRepositoryImpl repo;
+  final ProductoRepository repo;
   Deleteproducto(this.repo);
 
   Future<void> call(int id, int usuarioId) =>

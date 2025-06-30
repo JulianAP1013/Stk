@@ -28,7 +28,7 @@ class ProtuctoDatasourceImpl implements Productodatasource {
   Future<List<ProductoModel>> getProductosConStockBajo(int usuarioId) async {
     final List<Map<String, dynamic>> maps = await db.query(
       'productos',
-      where: 'usuarioId = ? AND cantidad <= umbralStockBajo',
+      where: 'usuarioId = ? AND stock <= umbral_stock_bajo',
       whereArgs: [usuarioId],
     );
     return List.generate(maps.length, (i) {
