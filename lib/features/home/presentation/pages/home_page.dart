@@ -24,7 +24,7 @@ class HomePage extends ConsumerWidget {
         backgroundColor: Colors.blueAccent,
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: const Icon(Icons.logout, color: Colors.black),
             onPressed: () {
               ref.read(authViewModelProvider).logout();
               Navigator.pushReplacementNamed(context, '/Login');

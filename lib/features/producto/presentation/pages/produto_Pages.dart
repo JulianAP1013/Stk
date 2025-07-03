@@ -32,11 +32,6 @@ class ProductoPage extends ConsumerWidget {
           final productos = snapshot.data!;
           final totalStockBajo =
               productos.where((p) => p.stock <= p.umbralStockBajo).length;
-          if (productos.isEmpty) {
-            return const Emptylistmessage(
-              message: 'No hay Productos Registrados',
-            );
-          }
           return Column(
             children: [
               Padding(
@@ -67,47 +62,93 @@ class ProductoPage extends ConsumerWidget {
                   ),
                 ),
               ),
-              Expanded(
-                child: ListView.builder(
-                  padding: const EdgeInsets.all(16),
-                  itemCount: productos.length,
-                  itemBuilder: (context, index) {
-                    final producto = productos[index];
-                    return Productolistitem(
-                      producto: producto,
-                      onEdit:
-                          () => _mostrarFormularioProducto(
-                            context,
-                            ref,
-                            usuarioId,
+              ...(productos.isEmpty
+                  ? [
+                    const Expanded(
+                      child: Emptylistmessage(
+                        message: 'No hay Produtos Registrados',
+                      ),
+                    ),
+                  ]
+                  : [
+                    Expanded(
+                      child: ListView.builder(
+                        padding: const EdgeInsets.all(16),
+                        itemCount: productos.length,
+                        itemBuilder: (context, index) {
+                          final producto = productos[index];
+                          return Productolistitem(
                             producto: producto,
-                          ),
-                      onDelete: () async {
-                        try {
-                          if (producto.id != null) {
-                            await vm.deleteProducto(producto.id!, usuarioId);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Producto Eliminado'),
-                              ),
-                            );
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Error: Producto ID es nulo'),
-                              ),
-                            );
-                          }
-                        } catch (e) {
-                          ScaffoldMessenger.of(
-                            context,
-                          ).showSnackBar(SnackBar(content: Text('Error: $e')));
-                        }
-                      },
-                    );
-                  },
-                ),
-              ),
+                            onEdit:
+                                () => _mostrarFormularioProducto(
+                                  context,
+                                  ref,
+                                  usuarioId,
+                                  producto: producto,
+                                ),
+                            onDelete: () async {
+                              final confirm = await showDialog<bool>(
+                                context: context,
+                                builder:
+                                    (context) => AlertDialog(
+                                      title: const Text(
+                                        'Confirmar Eliminacion',
+                                      ),
+                                      content: const Text(
+                                        '¿Estas seguro que deseas eliminar este producto?',
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed:
+                                              () =>
+                                                  Navigator.pop(context, false),
+                                          child: const Text('Cancelar'),
+                                        ),
+                                        ElevatedButton(
+                                          onPressed:
+                                              () =>
+                                                  Navigator.pop(context, true),
+                                          child: const Text('Eliminar'),
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.red,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                              );
+                              if (confirm == true) {
+                                try {
+                                  if (producto.id != null) {
+                                    await vm.deleteProducto(
+                                      producto.id!,
+                                      usuarioId,
+                                    );
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text('Producto Eliminado'),
+                                      ),
+                                    );
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                          'Error: Producto ID es nulo',
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                } catch (e) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text('Error: $e')),
+                                  );
+                                }
+                              }
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ]),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: CustomCard(
